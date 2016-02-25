@@ -31,6 +31,15 @@ module.exports = function(){
 		return 0;
 	}
 
+	function creation(cellState, numberOfLiveNeighbours) {
+		if(cellState === 0) {
+			if(numberOfLiveNeighbours === 3) {
+				return 1;
+			}
+		}
+		return 0;
+	}
+
 	function evolve(gridState){
 		var newState = [];
 		return newState;
@@ -40,6 +49,7 @@ module.exports = function(){
 		underpopulation: underpopulation,
 		overcrowding: overcrowding,
 		survival: survival,
+		creation: creation,
 		evolve: evolve
 	};
 };

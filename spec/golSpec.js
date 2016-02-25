@@ -2,6 +2,7 @@ describe('The rules', function(){
 	var underpopulation = require('../script/gol')().underpopulation;
 	var overcrowding = require('../script/gol')().overcrowding;
 	var survival = require('../script/gol')().survival;
+	var creation = require('../script/gol')().creation;
 
 	it('Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.', function (){
 		expect(underpopulation(0,0)).toBe(0);
@@ -31,6 +32,13 @@ describe('The rules', function(){
 		expect(survival(1, 2)).toBe(1);
 		expect(survival(1, 3)).toBe(1);
 	});
+
+	it('Any empty position has exactly three neighbouring cells, a cell is created in its position, as if caused by creation.', function () {
+		expect(creation(0, 2)).toBe(0);
+		expect(creation(0, 3)).toBe(1);
+		expect(creation(0, 4)).toBe(0);
+	});
+
 });
 
 describe('Game', function (){
