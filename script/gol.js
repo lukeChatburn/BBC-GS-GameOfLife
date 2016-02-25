@@ -48,7 +48,37 @@ module.exports = function(){
 	}
 
 	function evolve(gridState){
+		var initialState = gridState;
 		var newState = [];
+		var cellNumber = [];
+		var neighbourArray = [];
+		var cell = null;
+		var index = 0;
+
+		for(var i = 0; i < initialState.length; i++) {
+			for(var j = 0; j < initialState[i].length; j++) {
+				cellNumber.push(initialState[i][j]);
+			}
+		}
+
+		neighbourArray.push((cellNumber[1] + cellNumber[3] + cellNumber[4]));
+		neighbourArray.push((cellNumber[0] + cellNumber[2] + cellNumber[3] + cellNumber[4] + cellNumber[5]));
+		neighbourArray.push((cellNumber[1] + cellNumber[4] + cellNumber[5]));
+		neighbourArray.push((cellNumber[0] + cellNumber[1] + cellNumber[4] + cellNumber[6] + cellNumber[7]));
+		neighbourArray.push((cellNumber[0] + cellNumber[1] + cellNumber[2] + cellNumber[3] + cellNumber[5] + cellNumber[6] + cellNumber[7] + cellNumber[8]));
+		neighbourArray.push((cellNumber[1] + cellNumber[2] + cellNumber[4] + cellNumber[7] + cellNumber[8]));
+		neighbourArray.push((cellNumber[3] + cellNumber[4] + cellNumber[7]));
+		neighbourArray.push((cellNumber[3] + cellNumber[4] + cellNumber[5] + cellNumber[6] + cellNumber[8]));
+		neighbourArray.push((cellNumber[4] + cellNumber[5] + cellNumber[7]));
+
+		for(var k = 0; k < initialState.length; k++) {
+			newState.push([]);
+			for(var l = 0; l < initialState[k].length; l++) {
+				cell = underpopulation(initialState[k][l], neighbourArray[index]);
+				newState[k].push(cell);
+				index++;
+			}
+		}
 		return newState;
 	}
 
