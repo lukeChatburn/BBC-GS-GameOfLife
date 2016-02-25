@@ -47,7 +47,8 @@ module.exports = function(){
 		return underpopulation(cellState, numberOfLiveNeighbours);
 	}
 
-	function evolve(gridState){
+	function evolve(gridState, numberOfEvolutions){
+		var evolutions = (numberOfEvolutions-1);
 		var initialState = gridState;
 		var newState = [];
 		var cellNumber = [];
@@ -79,7 +80,12 @@ module.exports = function(){
 				index++;
 			}
 		}
-		return newState;
+
+		if(evolutions > 0) {
+			return evolve(newState, evolutions);
+		}else {
+			return newState;
+		}
 	}
 
 	return {

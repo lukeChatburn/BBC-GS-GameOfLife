@@ -1,17 +1,17 @@
-describe('The rules', function(){
+describe('The rules', function() {
 	var underpopulation = require('../script/gol')().underpopulation;
 	var overcrowding = require('../script/gol')().overcrowding;
 	var survival = require('../script/gol')().survival;
 	var creation = require('../script/gol')().creation;
 	var nocells = require('../script/gol')().nocells;
 
-	it('Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.', function (){
-		expect(underpopulation(0,0)).toBe(0);
-		expect(underpopulation(0,1)).toBe(0);
-		expect(underpopulation(0,2)).toBe(0);
-		expect(underpopulation(1,0)).toBe(0);
-		expect(underpopulation(1,1)).toBe(0);
-		expect(underpopulation(1,2)).toBe(1);
+	it('Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.', function () {
+		expect(underpopulation(0, 0)).toBe(0);
+		expect(underpopulation(0, 1)).toBe(0);
+		expect(underpopulation(0, 2)).toBe(0);
+		expect(underpopulation(1, 0)).toBe(0);
+		expect(underpopulation(1, 1)).toBe(0);
+		expect(underpopulation(1, 2)).toBe(1);
 	});
 
 	it('Any live cell that has more than three neighbours dies, as if caused by overcrowding.', function () {
@@ -44,8 +44,8 @@ describe('The rules', function(){
 	it('Any initial state with no live cells, when the game evolves the next state also has no live cells.', function () {
 		expect(nocells(0, 0)).toBe(0);
 	});
-
 });
+
 
 describe('Game', function (){
 	var evolve = require('../script/gol')().evolve;
@@ -62,7 +62,53 @@ describe('Game', function (){
 			[0,0,0],
 			[0,0,0]
 		];
+		expect(evolve(initialState, 1)).toEqual(resultState);
+	});
 
-		expect(evolve(initialState)).toEqual(resultState);
+	it('can perform a different simple evolution', function(){
+		var initialState = [
+			[0,1,0],
+			[0,1,0],
+			[0,1,0]
+		];
+
+		var resultState = [
+			[0,0,0],
+			[1,1,1],
+			[0,0,0]
+		];
+		expect(evolve(initialState, 1)).toEqual(resultState);
+	});
+
+	it('can perform multiple evolutions', function(){
+		var initialState = [
+			[0,0,0],
+			[1,1,1],
+			[0,0,0]
+		];
+
+		var resultState = [
+			[0,0,0],
+			[1,1,1],
+			[0,0,0]
+		];
+		expect(evolve(initialState, 2)).toEqual(resultState);
+
+	});
+
+	it('can perform a dead cell evolution', function(){
+		var initialState = [
+			[0,0,0],
+			[0,0,0],
+			[0,0,0]
+		];
+
+		var resultState = [
+			[0,0,0],
+			[0,0,0],
+			[0,0,0]
+		];
+		expect(evolve(initialState, 1)).toEqual(resultState);
 	});
 });
+
