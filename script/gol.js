@@ -40,6 +40,13 @@ module.exports = function(){
 		return 0;
 	}
 
+	function nocells(cellState, numberOfLiveNeighbours) {
+		if(cellState === 0 && numberOfLiveNeighbours === 0) {
+			return 0;
+		}
+		return 1;
+	}
+
 	function evolve(gridState){
 		var newState = [];
 		return newState;
@@ -50,6 +57,7 @@ module.exports = function(){
 		overcrowding: overcrowding,
 		survival: survival,
 		creation: creation,
+		nocells: nocells,
 		evolve: evolve
 	};
 };

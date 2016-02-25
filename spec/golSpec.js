@@ -3,6 +3,7 @@ describe('The rules', function(){
 	var overcrowding = require('../script/gol')().overcrowding;
 	var survival = require('../script/gol')().survival;
 	var creation = require('../script/gol')().creation;
+	var nocells = require('../script/gol')().nocells;
 
 	it('Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.', function (){
 		expect(underpopulation(0,0)).toBe(0);
@@ -37,6 +38,10 @@ describe('The rules', function(){
 		expect(creation(0, 2)).toBe(0);
 		expect(creation(0, 3)).toBe(1);
 		expect(creation(0, 4)).toBe(0);
+	});
+
+	it('Any initial state with no live cells, when the game evolves the next state also has no live cells.', function () {
+		expect(nocells(0, 0)).toBe(0);
 	});
 
 });
