@@ -6,11 +6,11 @@ module.exports = function(){
 			}
 		}
 		else if(cellState === 0) {
-			if (numberOfLiveNeighbours >= 0 && numberOfLiveNeighbours <= 2) {
+			if (numberOfLiveNeighbours > 0 && numberOfLiveNeighbours <= 2) {
 				return 0;
 			}
 		}
-		return 1;
+		return overcrowding(cellState, numberOfLiveNeighbours);
 	}
 
 	function overcrowding(cellState, numberOfLiveNeighbours) {
@@ -19,7 +19,7 @@ module.exports = function(){
 				return 0;
 			}
 		}
-		return 1;
+		return survival(cellState, numberOfLiveNeighbours);
 	}
 
 	function survival(cellState, numberOfLiveNeighbours) {
@@ -28,7 +28,7 @@ module.exports = function(){
 				return 1;
 			}
 		}
-		return 0;
+		return creation(cellState, numberOfLiveNeighbours);
 	}
 
 	function creation(cellState, numberOfLiveNeighbours) {
@@ -37,14 +37,14 @@ module.exports = function(){
 				return 1;
 			}
 		}
-		return 0;
+		return nocells(cellState, numberOfLiveNeighbours);
 	}
 
 	function nocells(cellState, numberOfLiveNeighbours) {
 		if(cellState === 0 && numberOfLiveNeighbours === 0) {
 			return 0;
 		}
-		return 1;
+		return underpopulation(cellState, numberOfLiveNeighbours);
 	}
 
 	function evolve(gridState){

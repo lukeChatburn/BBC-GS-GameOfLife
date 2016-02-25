@@ -38,6 +38,7 @@ describe('The rules', function(){
 		expect(creation(0, 2)).toBe(0);
 		expect(creation(0, 3)).toBe(1);
 		expect(creation(0, 4)).toBe(0);
+		expect(creation(1, 3)).toBe(1);
 	});
 
 	it('Any initial state with no live cells, when the game evolves the next state also has no live cells.', function () {
